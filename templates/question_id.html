@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        th, td {
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
+<h1>Question details</h1>
+    <table style="width:80%">
+        <thead>
+        <tr>
+            <th> Title</th>
+            <th> Question </th>
+            <th> Submission Time </th>
+            <th> View number </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ question_data.title }}</td>
+            <td>{{ question_data.message }}</td>
+            <td>{{ question_data.submission_time }}</td>
+            <td>{{ question_data.view_number }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>The answers are :</p>
+        {% for answer in answers %}
+                <p><h>{{ answer }}</h></p>
+        {% endfor %}
+
+    <br><a href="/question/{{question_data.id}}/add-answer">Add new answer</a>
+</body>
+</html>
