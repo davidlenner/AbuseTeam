@@ -23,20 +23,16 @@
 <p><a href="/add-question"> Add new Question</a>
 <table style="width:80%">
     <thead>
-    <tr> {% for header in headers %}
-        {% if header == 'title' or header =='message' %}
-        <th> {{ header }}</th>
-        {% endif %}
-    {% endfor %}
-    </tr>
+    <td>Title</td>
+    <td>Message</td>
     </thead>
     <tbody>
     <tr> {% for question in questions %}
         <td>{{ question.title }}</td>
         <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
-        </tr>
-        </tbody>
-    {% endfor %}
+    </tr>
+    </tbody>
+        {% endfor %}
 </table>
 
 </body>
