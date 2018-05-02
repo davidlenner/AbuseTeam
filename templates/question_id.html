@@ -30,19 +30,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>{{ question_data.title }}</td>
-            <td>{{ question_data.message }}</td>
-            <td>{{ question_data.submission_time }}</td>
-            <td>{{ question_data.view_number }}</td>
+        <tr>{% for data in question %}
+                <td>{{ data.title }}</td>
+                <td>{{ data.message }}</td>
+                <td>{{ data.submission_time }}</td>
+                <td>{{ data.view_number }}</td>
         </tr>
         </tbody>
     </table>
     <p>The answers are :</p>
         {% for answer in answers %}
-                <p><h>{{ answer }}</h></p>
+                <p><h>{{ answer.message }}</h></p>
         {% endfor %}
 
-    <br><a href="/question/{{question_data.id}}/add-answer">Add new answer</a>
+    <br><a href="/question/{{data.id}}/add-answer">Add new answer</a>
+            {% endfor %}
 </body>
 </html>
