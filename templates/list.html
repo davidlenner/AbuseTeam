@@ -25,11 +25,17 @@
     <thead>
     <td>Title</td>
     <td>Message</td>
+    <td>Question Time</td>
+    <td>View Number</td>
+    <td>Vote Number</td>
     </thead>
     <tbody>
     <tr> {% for question in questions %}
         <td>{{ question.title }}</td>
         <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
+        <td>{{ question.submission_time }}</td>
+        <td>{{ question.view_number }}</td>
+        <td>{{ question.vote_number }}</td>
     </tr>
     </tbody>
         {% endfor %}

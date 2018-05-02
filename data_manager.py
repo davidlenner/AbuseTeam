@@ -1,6 +1,7 @@
 import util
 
 
+
 @util.connection_handler
 def get_question_and_title(cursor):
     cursor.execute("""
@@ -11,7 +12,7 @@ def get_question_and_title(cursor):
 
 
 @util.connection_handler
-def add_question(cursor, new_title, new_message):
+def add_question(cursor, question_id, new_title, new_message):
     cursor.execute("""
                     INSERT INTO question (title, message) VALUES (%(title)s, %(message)s);
                     """, {'title': new_title, 'message': new_message})
