@@ -18,10 +18,7 @@ def add_question():
     if request.method == "GET":
         return render_template('add_question.html')
 
-    title = request.form.get("title", "")
-    message = request.form.get("message", "")
-    data_manager.create_question(title, message)
-
+    data_manager.add_question(request.form['title'], request.form['message'])
     return redirect("/")
 
 
