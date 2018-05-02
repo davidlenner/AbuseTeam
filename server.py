@@ -27,19 +27,9 @@ def add_question():
 
 @app.route("/question/<question_id>", methods=['GET'])
 def question(question_id):
-    question_data = connection.get_question_by_id(question_id)
-    user_stories = connection.get_all_user_story("question.csv")
-    answers = connection.get_answer_by_id(question_id)
-    for item in user_stories:
-        if item["id"] == question_id and request.method == "GET":
-            item["view_number"] = int(item["view_number"])
-            item["view_number"] += 1
-            '''mi a faasz ez???'''
-            item["view_number"] = str(item["view_number"])
-            break
-    connection.dict_writer(user_stories, "question.csv")
-
-    return render_template('question_id.html', question_data=question_data, answers=answers)
+    answer = data_manager.get_answers(question_id)
+    question = data_manager.question_by_id(question_id)
+    return render_template('question_id.html', question=question, answer=answer)
 
 
 @app.route("/question/<question_id>/add-answer", methods=['GET','POST'])
