@@ -20,6 +20,7 @@ def get_answers(cursor, id):
     answers = cursor.fetchall()
     return answers
 
+
 @util.connection_handler
 def question_by_id(cursor, id):
     cursor.execute("""
@@ -29,6 +30,7 @@ def question_by_id(cursor, id):
                    {'id': id})
     question = cursor.fetchall()
     return question
+
 
 @util.connection_handler
 def add_question(cursor, question_id, new_title, new_message):
