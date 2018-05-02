@@ -40,16 +40,13 @@ def question(question_id):
 
 
 @app.route("/question/<question_id>/add-answer", methods=['GET','POST'])
-def new_answer(question_id):
-    question_data = connection.get_question_by_id(question_id)
-    if request.method == 'GET':
-        return render_template('add_answer.html', question_data=question_data)
-    else:
-        question_id = question_data['id']
-        message = request.form.get('message', '')
-        data_manager.save_answer(message, question_id)
+def add_answer(question_id):
 
-        return redirect('/')
+    if request.method == 'GET':
+        return render_template('add_answer.html')
+    message = request.form.get('message', '')
+    data_manager.add_answer(question_id, message)
+    return redirect('/')
 
 
 if __name__ == '__main__':

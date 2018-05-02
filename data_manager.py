@@ -17,3 +17,10 @@ def add_question(cursor, new_title, new_message):
                     """, {'title': new_title, 'message': new_message})
 
 
+@util.connection_handler
+def add_answer(cursor, new_id, new_message):
+    cursor.execute("""
+                    INSERT INTO answer (question_id, message) VALUES (%(question_id)s, %(message)s);
+                    """, {'question_id': new_id, 'message': new_message})
+
+
