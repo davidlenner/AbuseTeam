@@ -39,8 +39,8 @@
         </tbody>
     </table>
     <p>The answers are :</p>
-        {% for answer in answers %}
-                <p><h>{{ answer.message }}</h></p>
+        {% for data in answer %}
+        <p><h>{{ data.message }}</h></p>
         {% endfor %}
 
     <br><a href="/question/{{data.id}}/add-answer">Add new answer</a>
