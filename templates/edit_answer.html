@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>edit answer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+    <h1>Ask Mate</h1>
     {% for data in answer %}
     <form action="/answer/{{data.id}}/edit_answer" method="post">
     <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80" minlength="10">{{data.message}}</textarea></p>
