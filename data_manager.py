@@ -63,3 +63,11 @@ def update_answer(cursor, id, message):
                     SET message = %(message)s 
                     WHERE id = %(id)s;""",
                    {'id': id, 'message': message})
+
+@util.connection_handler
+def edit_question(cursor, edited_title, edited_message, id):
+    cursor.execute("""
+                    UPDATE question
+                    SET title=%(title)s, message=%(message)s
+                    WHERE id = %(id)s;
+                    """, {'title': edited_title, 'message': edited_message, 'id': id})
