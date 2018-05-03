@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new question</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 <body>
+<h1>Ask Mate</h1>
 <form action="{{url_for('add_question')}}" method="post">
     <input name="id" type="hidden" value="{{ id }}">
-    <h1 align="left">Add new question</h1>
-    Title of the Question:<br>
-    <input name="title" placeholder="maximum 20 characters" size="52" type="text" maxlength="20">
-
+    <h2>Please, write your question below.</h2>
+    Question title:<br>
     <br>
-    My question is:
-    <br><textarea name="message" placeholder="maximum 50 characters" rows="10" cols="80" minlength="10"></textarea>
+    <input name="title" placeholder="maximum 20 characters" size="52" type="text" maxlength="20">
+    <br>
+    <br>
+    <br>
+    My question:<br>
+    <br>
+    <textarea name="message" placeholder="maximum 50 characters" rows="10" cols="80" minlength="10"></textarea>
     <input type="hidden" value="{{ submission_time }}">
-    <p><button type="submit">Submit your question</button></p>
+    <p><button type="submit">Submit and show my question.</button></p>
 </form>
 
 </body>

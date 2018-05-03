@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-        }
-
-        th, td {
-            text-align: center;
-        }
-    </style>
     <meta charset="UTF-8">
     <title>Question</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<h1>Question details</h1>
-    <table style="width:80%">
+    <h1>Ask Mate</h1>
+    <h2>Question details</h2>
+    <table class="questiontables">
         <thead>
         <tr>
             <th> Title</th>
@@ -31,10 +19,10 @@
         </thead>
         <tbody>
         <tr>{% for data in question %}
-                <td>{{ data.title }}</td>
-                <td>{{ data.message }}</td>
-                <td>{{ data.submission_time }}</td>
-                <td>{{ data.view_number }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.message }}</td>
+            <td>{{ data.submission_time }}</td>
+            <td>{{ data.view_number }}</td>
         </tr>
         </tbody>
     </table>
@@ -43,7 +31,7 @@
         <p><h>{{ data.message }}</h></p>
         {% endfor %}
 
-    <br><a href="/question/{{data.id}}/add-answer">Add new answer</a>
+    <br><a href="/question/{{data.id}}/add-answer"><button type="button">Add new answer</a>
             {% endfor %}
 </body>
 </html>
