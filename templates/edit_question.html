@@ -6,8 +6,8 @@
 </head>
 <body>
     <h1>Ask Mate</h1>
+    <h2>Edit question</h2>
     <form action="/question/{{ question_id }}/edit_question" method="post">
-        <h2>Edit question</h2>
         <p>Title of the question</br>
         {% for data in question %}
         <input name="title" size="52" value={{ data.title }}></p>
