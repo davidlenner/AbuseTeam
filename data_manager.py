@@ -33,7 +33,6 @@ def question_by_id(cursor, id):
 
 
 @util.connection_handler
-def add_question(cursor, new_title, new_message):
 def add_question(cursor, new_title, new_message, time):
     cursor.execute("""
                     INSERT INTO question (title, message, submission_time) VALUES (%(title)s, %(message)s, %(submission_time)s);
@@ -64,6 +63,8 @@ def update_answer(cursor, id, message):
                     SET message = %(message)s 
                     WHERE id = %(id)s;""",
                    {'id': id, 'message': message})
+
+
 @util.connection_handler
 def edit_question(cursor, edited_title, edited_message, id):
     cursor.execute("""
