@@ -19,20 +19,20 @@
         </thead>
         <tbody>
         <tr>{% for data in question %}
-                <td>{{ data.title }}</td>
-                <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
-                <td>{{ data.submission_time }}</td>
-                <td>{{ data.view_number }}</td>
+            <td>{{ data.title }}</td>
+            <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
+            <td>{{ data.submission_time }}</td>
+            <td>{{ data.view_number }}</td>
         </tr>{% endfor %}
         </tbody>
     </table>
-    <p>The answers are :</p>
-        {% for data in answer %}
-<p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
-        {% endfor %}
-    <br><a href="/question/{{question_id}}/add-answer">Add new answer</a>
 
-    <br><a href="/question/{{data.id}}/add-answer"><button type="button">Add new answer</a>
-            {% endfor %}
+    <p>The answers are:</p>
+        {% for data in answer %}
+            <p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
+        {% endfor %}
+
+    <p><a href="/question/{{question_id}}/add-answer"><button type="button">Add new answer</button></a></p>
+
 </body>
 </html>
