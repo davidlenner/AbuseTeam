@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit answer</title>
+</head>
+<body>
+    {% for data in answer %}
+    <form action="/answer/{{data.id}}/edit_answer" method="post">
+    <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80" minlength="10">{{data.message}}</textarea></p>
+    {% endfor %}
+    <p><input type="submit" value="Submit your answer"></p>
+
+</body>
+</html>
