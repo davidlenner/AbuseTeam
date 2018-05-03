@@ -32,7 +32,7 @@
         <tbody>
         <tr>{% for data in question %}
                 <td>{{ data.title }}</td>
-                <td>{{ data.message }}</td>
+                <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
                 <td>{{ data.submission_time }}</td>
                 <td>{{ data.view_number }}</td>
         </tr>

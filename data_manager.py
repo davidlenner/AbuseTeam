@@ -25,7 +25,7 @@ def get_answers(cursor, id):
 def question_by_id(cursor, id):
     cursor.execute("""
                     SELECT * FROM question
-                    WHERE  id = %(id)s;
+                    WHERE id = %(id)s;
                     """,
                    {'id': id})
     question = cursor.fetchall()
@@ -33,7 +33,7 @@ def question_by_id(cursor, id):
 
 
 @util.connection_handler
-def add_question(cursor, question_id, new_title, new_message):
+def add_question(cursor, new_title, new_message):
     cursor.execute("""
                     INSERT INTO question (title, message) VALUES (%(title)s, %(message)s);
                     """, {'title': new_title, 'message': new_message})
@@ -46,3 +46,10 @@ def add_answer(cursor, new_id, new_message):
                     """, {'question_id': new_id, 'message': new_message})
 
 
+@util.connection_handler
+def edit_question(cursor, edited_title, edited_message, id):
+    cursor.execute("""
+                    UPDATE question
+                    SET title=%(title)s, message=%(message)s
+                    WHERE id = %(id)s;
+                    """, {'title': edited_title, 'message': edited_message, 'id': id})
