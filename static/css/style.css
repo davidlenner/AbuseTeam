@@ -1,0 +1,42 @@
+body {
+    background-color: darkgray;
+}
+
+
+h1 {
+    color: white;
+    background-color: #008699;
+    margin: 0;
+    padding: 4px;
+    text-align: center;
+}
+
+
+.questiontables {
+    background-color: black;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+
+.questiontables td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.questiontables td {
+    background-color: white;
+}
+
+
+.questiontables th {
+    height: 100px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #008699;
+    color: white;
+}
+
+
+.questiontables tr:nth-child(odd) {background-color: #f2f2f2;}

@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-        }
-
-        th, td {
-            text-align: center;
-        }
-    </style>
     <meta charset="UTF-8">
     <title>Question</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<h1>Question details</h1>
-    <table style="width:80%">
+    <h1>Ask Mate</h1>
+    <h2>Question details</h2>
+    <table class="questiontables">
         <thead>
         <tr>
             <th> Title</th>
@@ -31,18 +19,20 @@
         </thead>
         <tbody>
         <tr>{% for data in question %}
-                <td>{{ data.title }}</td>
-                <td>{{ data.message }}</td>
-                <td>{{ data.submission_time }}</td>
-                <td>{{ data.view_number }}</td>
+            <td>{{ data.title }}</td>
+            <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
+            <td>{{ data.submission_time }}</td>
+            <td>{{ data.view_number }}</td>
         </tr>{% endfor %}
         </tbody>
     </table>
-    <p>The answers are :</p>
+
+    <p>The answers are:</p>
         {% for data in answer %}
-<p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
+            <p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
         {% endfor %}
-    <br><a href="/question/{{question_id}}/add-answer">Add new answer</a>
+
+    <p><a href="/question/{{question_id}}/add-answer"><button type="button">Add new answer</button></a></p>
 
 </body>
 </html>

@@ -49,6 +49,15 @@ def edit_answer(answer_id):
     return redirect('/')
 
 
+@app.route("/question/<question_id>/edit_question", methods=['GET', 'POST'])
+def edit_question(question_id):
+    if request.method == "GET":
+        question = data_manager.question_by_id(question_id)
+        return render_template('edit_question.html', question=question, question_id=question_id)
+    data_manager.edit_question(request.form['title'], request.form['message'], question_id)
+    return redirect('/')
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new answer</title>
-    <h1 align="left">Add new answer</h1>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+    <h1>Ask Mate</h1>
+    <h2>Add new answer</h2>
     {% for data in question %}
     <form action="/question/{{ data['id'] }}/add-answer" method="post">
             <p>{{ data['message'] }}</p>
             <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80" minlength="10"></textarea></p>
-            <p><input type="submit" value="Submit your answer"></p>
+            <p><input type="submit" value="Submit your answer."></p>
         {% endfor %}
     </form>
 
