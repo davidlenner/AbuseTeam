@@ -46,7 +46,6 @@ def add_answer(cursor, new_id, new_message,time):
                     """, {'question_id': new_id, 'message': new_message, 'submission_time': time})
 
 
-
 @util.connection_handler
 def get_answer_by_id(cursor, id):
     cursor.execute("""SELECT * FROM answer

@@ -1,45 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-        }
-
-        th, td {
-            text-align: center;
-        }
-    </style>
     <meta charset="utf-8">
     <title>Ask Mate</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<h1>Ask Mate</h1>
-<p><a href="/add-question"> Add new Question</a>
-<table style="width:80%">
-    <thead>
-    <td>Title</td>
-    <td>Message</td>
-    <td>Question Time</td>
-    <td>View Number</td>
-    <td>Vote Number</td>
-    </thead>
-    <tbody>
-    <tr> {% for question in questions %}
-        <td>{{ question.title }}</td>
-        <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
-        <td>{{ question.submission_time }}</td>
-        <td>{{ question.view_number }}</td>
-        <td>{{ question.vote_number }}</td>
-    </tr>
-    </tbody>
-        {% endfor %}
-</table>
+    <h1>Ask Mate</h1><br>
+
+    <table class="questiontables">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Question Time</th>
+            <th>View Number</th>
+            <th>Vote Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr> {% for question in questions %}
+            <td>{{ question.title }}</td>
+            <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
+            <td>{{ question.submission_time }}</td>
+            <td>{{ question.view_number }}</td>
+            <td>{{ question.vote_number }}</td>
+        </tr>
+        </tbody>
+            {% endfor %}
+    </table>
+
+    <p><a href="/add-question"><button type="button">Add new question</button></a></p>
 
 </body>
 </html>
