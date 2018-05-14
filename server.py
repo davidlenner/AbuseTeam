@@ -32,8 +32,10 @@ def question(question_id):
 @app.route("/question/<question_id>/add-answer", methods=['GET', 'POST'])
 def add_answer(question_id):
     question = data_manager.question_by_id(question_id)
+
     if request.method == 'GET':
         return render_template('add_answer.html', question=question)
+
     message = request.form.get('message', '')
     dt = datetime.now()
     data_manager.add_answer(question_id, message, dt)
