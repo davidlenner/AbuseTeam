@@ -25,6 +25,7 @@ h1 {
     text-align: center;
 }
 
+
 .questiontables td {
     background-color: white;
 }
@@ -39,4 +40,4 @@ h1 {
 }
 
 
-.questiontables tr:nth-child(odd) {background-color: #f2f2f2;}
+.questiontables tr:nth-child(even) {background-color: #f2f2f2;}

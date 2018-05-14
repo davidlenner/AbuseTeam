@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Ask Mate</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css"> <!--jinja static asset-->
 </head>
 <body>
     <h1>Ask Mate</h1><br>
@@ -19,15 +19,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr> {% for question in questions %}
+        {% for question in questions %}
+        <tr>
             <td>{{ question.title }}</td>
             <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
             <td>{{ question.submission_time }}</td>
             <td>{{ question.view_number }}</td>
             <td>{{ question.vote_number }}</td>
         </tr>
+        {% endfor %}
         </tbody>
-            {% endfor %}
     </table>
 
     <p><a href="/add-question"><button type="button">Add new question</button></a></p>
