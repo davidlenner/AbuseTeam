@@ -18,21 +18,30 @@
         </tr>
         </thead>
         <tbody>
-        <tr>{% for data in question %}
-            <td>{{ data.title }}</td>
-            <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
-            <td>{{ data.submission_time }}</td>
-            <td>{{ data.view_number }}</td>
-        </tr>{% endfor %}
+        {% for data in question %}
+            <tr>
+                <td>{{ data.title }}</td>
+                <td>{{ data.message }}</a></td>
+                <td>{{ data.submission_time }}</td>
+                <td>{{ data.view_number }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
+    <p>
+        <a href="/question/{{ question_id }}/edit_question"><button type="button">Edit question</button></a>
+        <a href="/question/{{ question_id }}/delete_question"><button type="button">Delete question</button></a>
+    </p>
+
     <p>The answers are:</p>
         {% for data in answer %}
-            <p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
+            <p><h><a href="/answer/{{ data.id }}/edit_answer">{{ data.message }}</a></h></p>
         {% endfor %}
 
-    <p><a href="/question/{{question_id}}/add-answer"><button type="button">Add new answer</button></a></p>
+    <p>
+        <a href="/question/{{ question_id }}/add-answer"><button type="button">Add new answer</button></a>
+    </p>
 
 </body>
 </html>
