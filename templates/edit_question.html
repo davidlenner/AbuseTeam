@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Question</title>
+    <title>Edit question</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>Ask Mate</h1>
+
     <h2>Edit question</h2>
-    <form action="/question/{{ question_id }}/edit_question" method="post">
+
+    <form action="/question/{{ question_id }}/edit-question" method="post">
         <p>Title of the question</br>
         {% for data in question %}
-        <input name="title" size="52" value={{ data.title }}></p>
-        <p>Text of message</br>
-        <textarea name="message" rows="10" cols="80">{{ data.message }}</textarea></p>
+            <input name="title" size="52" value={{ data.title }}></p>
+            <p>Text of message</br>
+            <textarea name="message" rows="10" cols="80">{{ data.message }}</textarea></p>
         {% endfor %}
         <input type="submit" value="Edit question">
     </form>

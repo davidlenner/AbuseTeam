@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>edit answer</title>
+    <title>Edit answer</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>Ask Mate</h1>
+
     <h2>Edit answer</h2>
+
     {% for data in answer %}
-    <form action="/answer/{{data.id}}/edit_answer" method="post">
-    <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80" minlength="10">{{data.message}}</textarea></p>
+    <form action="/question/{{ question_id }}/answer/{{ data.id }}/edit-answer" method="post">
+    <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80"
+                 minlength="10">{{ data.message }}</textarea></p>
     {% endfor %}
     <p><input type="submit" value="Submit your answer"></p>
     </form>
