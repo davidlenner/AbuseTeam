@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, redirect
 import data_manager
 from datetime import datetime
+import pwhashing
 
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def list_questions():
-    questions = data_manager.get_questions()
+@app.route("/", methods=['GET', 'POST'])
+def list():
+    questions = data_manager.get_question_and_title()
     return render_template('list.html', questions=reversed(questions))
 
 
@@ -60,8 +61,18 @@ def edit_answer(question_id, answer_id):
     data_manager.get_question_by_id(question_id)
     if request.method == 'GET':
         answer = data_manager.get_answer_by_id(answer_id)
-        return render_template('edit_answer.html', question_id=question_id, answer=answer)
-    data_manager.edit_answer(answer_id, request.form['message'])
+        return render_template('edit_answer.html', question_id=question_id, answer=answer
+        
+    data_manager.update_answer(answer_id, request.form['message'])
+    return redirect('/')
+
+
+@app.route("/question/<question_id>/edit_question", methods=['GET', 'POST'])
+def edit_question(question_id):
+    if request.method == "GET":
+        question = data_manager.question_by_id(question_id)
+        return render_template('edit_question.html', question=question, question_id=question)
+    data_manager.edit_question(request.form['title'], request.form['message'], question_id)
     return redirect('/')
 
 
@@ -70,6 +81,24 @@ def delete_answer(question_id, answer_id):
     data_manager.get_question_by_id(question_id)
     data_manager.delete_answer(answer_id)
     return redirect('/')
+
+@app.route("/registration", methods=['GET', 'POST'])
+def registration():
+    if request.method == 'POST':
+        usernames = data_manager.check_usernames()
+        username = request.form.get('username', '')
+        for dict in usernames:
+            for names in dict:
+                if names == username:
+                    time = datetime.now()
+                    hashedpw = pwhashing.hash_password(request.form.get('password', ''))
+                    data_manager.registration(username, hashedpw, time)
+                    return redirect('/')
+                else:
+                    used_name = 'True'
+                    return render_template('registration.html', used_name=used_name)
+    return render_template('registration.html')
+
 
 
 
