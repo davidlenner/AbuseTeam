@@ -90,6 +90,15 @@ def edit_answer(cursor, id, message):
 
 
 @util.connection_handler
+def delete_answer(cursor, id):
+    cursor.execute("""
+                    DELETE FROM answer
+                    WHERE id = %(id)s
+                    """,
+                   {'id': id})
+
+
+@util.connection_handler
 def delete_answer_by_question_id(cursor, question_id):
     cursor.execute("""
                     DELETE FROM answer
