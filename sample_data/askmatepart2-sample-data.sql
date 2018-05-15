@@ -65,6 +65,18 @@ CREATE TABLE tag (
 );
 
 
+create table users
+(
+  id serial NOT NULL
+    constraint users_pkey
+    primary key
+    ,
+  user_name         text    not null,
+  password          text    not null,
+  registration_time timestamp
+);
+
+
 ALTER TABLE ONLY answer
     ADD CONSTRAINT pk_answer_id PRIMARY KEY (id);
 

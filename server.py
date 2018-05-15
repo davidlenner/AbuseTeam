@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect
 import data_manager
 from datetime import datetime
+import pwhashing
 
 
 app = Flask(__name__)
 
 
-@app.route("/")
-@app.route("/list")
+@app.route("/", methods=['GET', 'POST'])
 def list():
     questions = data_manager.get_question_and_title()
     return render_template('list.html', questions=reversed(questions))
@@ -53,9 +53,27 @@ def edit_answer(answer_id):
 def edit_question(question_id):
     if request.method == "GET":
         question = data_manager.question_by_id(question_id)
-        return render_template('edit_question.html', question=question, question_id=question_id)
+        return render_template('edit_question.html', question=question, question_id=question)
     data_manager.edit_question(request.form['title'], request.form['message'], question_id)
     return redirect('/')
+
+
+@app.route("/registration", methods=['GET', 'POST'])
+def registration():
+    if request.method == 'POST':
+        usernames = data_manager.check_usernames()
+        username = request.form.get('username', '')
+        for dict in usernames:
+            for names in dict:
+                if names == username:
+                    time = datetime.now()
+                    hashedpw = pwhashing.hash_password(request.form.get('password', ''))
+                    data_manager.registration(username, hashedpw, time)
+                    return redirect('/')
+                else:
+                    used_name = 'True'
+                    return render_template('registration.html', used_name=used_name)
+    return render_template('registration.html')
 
 
 if __name__ == '__main__':

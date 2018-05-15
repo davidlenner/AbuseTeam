@@ -71,3 +71,17 @@ def edit_question(cursor, edited_title, edited_message, id):
                     SET title=%(title)s, message=%(message)s
                     WHERE id = %(id)s;
                     """, {'title': edited_title, 'message': edited_message, 'id': id})
+
+
+@util.connection_handler
+def registration(cursor, username, password, time):
+    cursor.execute("""INSERT INTO users (user_name,password,registration_time) VALUES (%(user_name)s,%(password)s,%(registration_time)s);
+                    """, {'user_name': username, 'password': password, 'registration_time': time})
+
+
+@util.connection_handler
+def check_usernames(cursor):
+    cursor.execute("""SELECT user_name FROM users""")
+
+    usernames = cursor.fetchall()
+    return usernames
