@@ -40,3 +40,7 @@ h1 {
 
 
 .questiontables tr:nth-child(odd) {background-color: #f2f2f2;}
+
+.button {
+    align-items: right;
+}

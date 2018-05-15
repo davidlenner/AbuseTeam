@@ -92,10 +92,10 @@ def edit_answer(cursor, id, message):
 @util.connection_handler
 def delete_answer_by_question_id(cursor, question_id):
     cursor.execute("""
-                    UPDATE question
-                    SET title=%(title)s, message=%(message)s
-                    WHERE id = %(id)s;
-                    """, {'title': edited_title, 'message': edited_message, 'id': id})
+                    DELETE FROM answer
+                    WHERE question_id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
 
 
 @util.connection_handler
@@ -110,7 +110,3 @@ def check_usernames(cursor):
 
     usernames = cursor.fetchall()
     return usernames
-                    DELETE FROM answer
-                    WHERE question_id = %(question_id)s;
-                    """,
-                   {'question_id': question_id})
