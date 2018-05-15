@@ -64,6 +64,16 @@ CREATE TABLE tag (
     name text
 );
 
+CREATE TABLE users (
+    id serial NOT NULL
+      constraint users_pkey
+      primary key,
+    user_name         varchar,
+    password          varchar,
+    registration_time timestamp,
+    column_5          integer
+);
+
 
 ALTER TABLE ONLY answer
     ADD CONSTRAINT pk_answer_id PRIMARY KEY (id);
