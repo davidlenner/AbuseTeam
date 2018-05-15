@@ -1,16 +1,45 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import data_manager
 from datetime import datetime
+import pwhashing
 
 
 app = Flask(__name__)
 
 
 @app.route("/")
-@app.route("/list")
-def list():
-    questions = data_manager.get_question_and_title()
-    return render_template('list.html', questions=reversed(questions))
+@app.route("/list", methods=['GET', 'POST'])
+@app.route("/list/<username>", methods=['GET', 'POST'])
+def route_list():
+    if request.method == 'GET':
+        questions = data_manager.get_question_and_title()
+        return render_template('list.html', questions=reversed(questions))
+
+    elif request.method == 'POST':
+        user_input_username = request.form.get('user_input_username', None)
+        user_input_password = request.form.get('user_input_password', None)
+        hashed_password = pwhashing.hash_password(user_input_password)
+
+        checking = data_manager.check_user()
+
+        for dict in checking:
+            for user in dict:
+                if user in checking:
+                    return render_template()
+                else:
+                    message = "Invalid username or password!"
+                    return render_template("list.html", message=message)
+
+        database_password = data_manager.get_password(user_input_username)
+        is_registered = data_manager.check_user(user_input_username)
+        checking_password = pwhashing.verify_password(user_input_password, database_password)
+
+        if is_registered and checking_password:
+            session['id'] = data_manager.get_user_id(user_input_username)
+            return render_template("list/<username>")
+        else:
+            message = "Invalid username or password!"
+            return render_template('list.html', message=message)
 
 
 @app.route("/add-question", methods=["GET", "POST"])
@@ -66,3 +95,4 @@ if __name__ == '__main__':
         port=8000,
         debug=True,
     )
+    app.secret_key = 'AskMateSecretKey'

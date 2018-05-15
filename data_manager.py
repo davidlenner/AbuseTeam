@@ -76,3 +76,40 @@ def edit_question(cursor, edited_title, edited_message, id):
                     WHERE id = %(id)s;
                     """,
                    {'title': edited_title, 'message': edited_message, 'id': id})
+
+
+@util.connection_handler
+def get_password(cursor, typed_user_name):
+    cursor.execute("""
+                    SELECT password
+                    FROM users
+                    WHERE user_name =%(user_name)s;
+                    """,
+                   {'user_name': typed_user_name})
+    database_password = cursor.fetchall()
+
+    return database_password
+
+
+@util.connection_handler
+def check_user(cursor):
+    cursor.execute("""
+                    SELECT *
+                    FROM users;
+                    """,)
+    users = cursor.fetchall()
+
+    return users
+
+
+@util.connection_handler
+def get_user_id(cursor, user_name):
+    cursor.execute("""
+                    SELECT id
+                    FROM users
+                    WHERE user_name=%(user_name)s;
+                    """,
+                   {'user_name': user_name})
+    user_id = cursor.fetchall()
+
+    return user_id
