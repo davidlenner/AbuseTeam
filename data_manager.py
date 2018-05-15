@@ -92,6 +92,24 @@ def edit_answer(cursor, id, message):
 @util.connection_handler
 def delete_answer_by_question_id(cursor, question_id):
     cursor.execute("""
+                    UPDATE question
+                    SET title=%(title)s, message=%(message)s
+                    WHERE id = %(id)s;
+                    """, {'title': edited_title, 'message': edited_message, 'id': id})
+
+
+@util.connection_handler
+def registration(cursor, username, password, time):
+    cursor.execute("""INSERT INTO users (user_name,password,registration_time) VALUES (%(user_name)s,%(password)s,%(registration_time)s);
+                    """, {'user_name': username, 'password': password, 'registration_time': time})
+
+
+@util.connection_handler
+def check_usernames(cursor):
+    cursor.execute("""SELECT user_name FROM users""")
+
+    usernames = cursor.fetchall()
+    return usernames
                     DELETE FROM answer
                     WHERE question_id = %(question_id)s;
                     """,
