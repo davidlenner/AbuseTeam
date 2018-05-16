@@ -40,4 +40,34 @@ h1 {
 }
 
 
+.questiontables tr:nth-child(odd) {background-color: #f2f2f2;}
+
+
+.answertables {
+    background-color: black;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+
+.answertables td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+.answertables td {
+    background-color: white;
+}
+
+
+.answertables th {
+    height: 100px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #008699;
+    color: white;
+}
+
 .questiontables tr:nth-child(even) {background-color: #f2f2f2;}
