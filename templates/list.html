@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Ask Mate</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css"> <!--jinja static asset-->
 </head>
 <body>
     <h1>Ask Mate</h1><br>
@@ -12,6 +12,13 @@
         <p><input type="submit" value="Registration"></p>
         </form>
     </div>
+    <form action="/list" method="post">
+        <div>
+            <input type="text" name="user_input_username" value="username">
+            <input type="text" name="user_input_password" value="password">
+            <input type="submit" value="Login"> {{ message }}
+        </div>
+    </form>
     <table class="questiontables">
         <thead>
         <tr>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import data_manager
 from datetime import datetime
 import pwhashing
@@ -9,8 +9,9 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def list():
-    questions = data_manager.get_question_and_title()
+    questions = data_manager.get_questions()
     return render_template('list.html', questions=reversed(questions))
+
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -48,10 +49,14 @@ def delete_question(question_id):
 @app.route('/question/<question_id>/add-answer', methods=['GET', 'POST'])
 def add_answer(question_id):
     question = data_manager.get_question_by_id(question_id)
-    if request.method == 'GET':
-        return render_template('add_answer.html', question=question)
     message = request.form.get('message', '')
     dt = datetime.now()
+
+    if request.method == 'GET':
+        return render_template('add_answer.html', question=question)
+
+    # message = request.form.get('message', '')
+    # dt = datetime.now()
     data_manager.add_answer(question_id, message, dt)
     return redirect('/')
 
@@ -61,18 +66,9 @@ def edit_answer(question_id, answer_id):
     data_manager.get_question_by_id(question_id)
     if request.method == 'GET':
         answer = data_manager.get_answer_by_id(answer_id)
-        return render_template('edit_answer.html', question_id=question_id, answer=answer
-        
-    data_manager.update_answer(answer_id, request.form['message'])
-    return redirect('/')
+        return render_template('edit_answer.html', question_id=question_id, answer=answer)
 
-
-@app.route("/question/<question_id>/edit_question", methods=['GET', 'POST'])
-def edit_question(question_id):
-    if request.method == "GET":
-        question = data_manager.question_by_id(question_id)
-        return render_template('edit_question.html', question=question, question_id=question)
-    data_manager.edit_question(request.form['title'], request.form['message'], question_id)
+    data_manager.edit_answer(answer_id, request.form['message'])
     return redirect('/')
 
 
@@ -81,6 +77,7 @@ def delete_answer(question_id, answer_id):
     data_manager.get_question_by_id(question_id)
     data_manager.delete_answer(answer_id)
     return redirect('/')
+
 
 @app.route("/registration", methods=['GET', 'POST'])
 def registration():
@@ -100,11 +97,10 @@ def registration():
     return render_template('registration.html')
 
 
-
-
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
         port=8000,
         debug=True,
     )
+    app.secret_key = 'AskMateSecretKey'
