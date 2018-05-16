@@ -23,25 +23,26 @@
         <thead>
         <tr>
             <th>Title</th>
-            <th>Question</th>
-            <th>Submission Time</th>
+            <th>Message</th>
+            <th>Question Time</th>
             <th>View Number</th>
             <th>Vote Number</th>
         </tr>
         </thead>
         <tbody>
         {% for question in questions %}
-            <tr>
-                <td>{{ question.title }}</td>
-                <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
-                <td>{{ question.submission_time }}</td>
-                <td>{{ question.view_number }}</td>
-                <td>{{ question.vote_number }}</td>
-            </tr>
+        <tr>
+            <td>{{ question.title }}</td>
+            <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
+            <td>{{ question.submission_time }}</td>
+            <td>{{ question.view_number }}</td>
+            <td>{{ question.vote_number }}</td>
+        </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <p><a href="/add-question"><button type="button">Add new question</button></a></p>
+
 </body>
 </html>
