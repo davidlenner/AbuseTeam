@@ -64,25 +64,14 @@ CREATE TABLE tag (
     name text
 );
 
-CREATE TABLE users (
-    id serial NOT NULL
-      constraint users_pkey
-      primary key,
-    user_name         varchar,
-    password          varchar,
-    registration_time timestamp,
-    column_5          integer
-);
-
 
 create table users
 (
   id serial NOT NULL
     constraint users_pkey
-    primary key
-    ,
-  user_name         text    not null,
-  password          text    not null,
+    primary key,
+  user_name         varchar not null,
+  password          varchar not null,
   registration_time timestamp
 );
 
