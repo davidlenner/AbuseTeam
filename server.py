@@ -100,7 +100,7 @@ def delete_answer(question_id, answer_id):
 @app.route("/registration", methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
-        usernames = data_manager.check_usernames()
+        usernames = data_manager.check_user()
         username = request.form.get('username', '')
         for dict in usernames:
             for key, values in dict.items():
