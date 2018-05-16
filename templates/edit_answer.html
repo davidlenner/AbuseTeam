@@ -11,7 +11,7 @@
     <h2>Edit answer</h2>
 
     {% for data in answer %}
-    <form action="/question/{{ question_id }}/answer/{{ data.id }}/edit-answer" method="post">
+    <form action="/question/{{ data.question_id }}/answer/{{ data.id }}/edit-answer" method="post">
     <p><textarea name="message" placeholder="maximum 10 characters" rows="10" cols="80"
                  minlength="10">{{ data.message }}</textarea></p>
     {% endfor %}
