@@ -7,31 +7,41 @@
 </head>
 <body>
     <h1>Ask Mate</h1><br>
-
+    <div class="button">
+        <form action="{{url_for('registration')}}" method="get">
+        <p><input type="submit" value="Registration"></p>
+        </form>
+    </div>
+    <form action="/list" method="post">
+        <div>
+            <input type="text" name="user_input_username" value="username">
+            <input type="text" name="user_input_password" value="password">
+            <input type="submit" value="Login"> {{ message }}
+        </div>
+    </form>
     <table class="questiontables">
         <thead>
         <tr>
             <th>Title</th>
-            <th>Message</th>
-            <th>Question Time</th>
+            <th>Question</th>
+            <th>Submission Time</th>
             <th>View Number</th>
             <th>Vote Number</th>
         </tr>
         </thead>
         <tbody>
         {% for question in questions %}
-        <tr>
-            <td>{{ question.title }}</td>
-            <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
-            <td>{{ question.submission_time }}</td>
-            <td>{{ question.view_number }}</td>
-            <td>{{ question.vote_number }}</td>
-        </tr>
+            <tr>
+                <td>{{ question.title }}</td>
+                <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
+                <td>{{ question.submission_time }}</td>
+                <td>{{ question.view_number }}</td>
+                <td>{{ question.vote_number }}</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <p><a href="/add-question"><button type="button">Add new question</button></a></p>
-
+    <p><a href="/add-question"><button type="button">Ask a question</button></a></p>
 </body>
 </html>
