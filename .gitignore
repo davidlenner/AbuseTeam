@@ -84,7 +84,7 @@ Scripts/
 # Shared
 pyvenv.cfg
 
-venv
+
 # End of https://www.gitignore.io/api/venv,pycharm
 
 venv
