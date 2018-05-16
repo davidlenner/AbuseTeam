@@ -16,7 +16,7 @@
         <tr>
             <th>Title</th>
             <th>Question</th>
-            <th>Submission Time</th>
+            <th>Submission time</th>
             <th>View number</th>
             <th>Actions</th>
         </tr>
@@ -29,8 +29,8 @@
                 <td>{{ data.submission_time }}</td>
                 <td>{{ data.view_number }}</td>
                 <td>
-                    <p><a href="/question/{{ question_id }}/edit_question"><button type="button">Edit question</button></a></p>
-                    <p><a href="/question/{{ question_id }}/delete_question"><button type="button">Delete question</button></a></p>
+                    <p><a href="/question/{{ question_id }}/edit-question"><button type="button">Edit question</button></a></p>
+                    <p><a href="/question/{{ question_id }}/delete-question"><button type="button">Delete question</button></a></p>
                 </td>
             </tr>
         {% endfor %}
@@ -43,6 +43,7 @@
         <thead>
         <tr>
             <th>Answer</th>
+            <th>Submission time</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -50,6 +51,7 @@
         {% for data in answer %}
             <tr>
                 <td>{{ data.message }}</td>
+                <td>{{ data.submission_time }}</td>
                 <td>
                     <p><a href="/question/{{ question_id }}/answer/{{ data.id }}/edit-answer"><button type="button">Edit answer</button></a></p>
                     <p><a href="/question/{{ question_id }}/answer/{{ data.id }}/delete-answer"><button type="button">Delete answer</button></a></p>

@@ -5,28 +5,29 @@ import pwhashing
 
 
 app = Flask(__name__)
+app.secret_key = 'AskMateSecretKey'
 
 
-@app.route("/", methods=['GET', 'POST'])
-def list():
+@app.route('/', methods=['GET', 'POST'])
+def main_page():
     questions = data_manager.get_questions()
     return render_template('list.html', questions=reversed(questions))
-
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def add_question():
     if request.method == 'GET':
         return render_template('add_question.html')
-    dt = datetime.now()
-    data_manager.add_question(request.form['title'], request.form['message'], dt)
+
+    submission_time = datetime.now()
+    data_manager.add_question(request.form['title'], request.form['message'], submission_time)
     return redirect('/')
 
 
 @app.route('/question/<question_id>', methods=['GET'])
 def question_by_id(question_id):
-    answer = data_manager.get_answers(question_id)
     question = data_manager.get_question_by_id(question_id)
+    answer = data_manager.get_answers(question_id)
     return render_template('question_id.html', question=question, answer=answer, question_id=question_id)
 
 
@@ -35,6 +36,7 @@ def edit_question(question_id):
     if request.method == 'GET':
         question = data_manager.get_question_by_id(question_id)
         return render_template('edit_question.html', question=question, question_id=question_id)
+
     data_manager.edit_question(request.form['title'], request.form['message'], question_id)
     return redirect('/')
 
@@ -49,15 +51,12 @@ def delete_question(question_id):
 @app.route('/question/<question_id>/add-answer', methods=['GET', 'POST'])
 def add_answer(question_id):
     question = data_manager.get_question_by_id(question_id)
-    message = request.form.get('message', '')
-    dt = datetime.now()
 
     if request.method == 'GET':
         return render_template('add_answer.html', question=question)
 
-    # message = request.form.get('message', '')
-    # dt = datetime.now()
-    data_manager.add_answer(question_id, message, dt)
+    submission_time = datetime.now()
+    data_manager.add_answer(question_id, request.form['message'], submission_time)
     return redirect('/')
 
 
@@ -103,4 +102,3 @@ if __name__ == '__main__':
         port=8000,
         debug=True,
     )
-    app.secret_key = 'AskMateSecretKey'

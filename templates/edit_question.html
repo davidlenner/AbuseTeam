@@ -9,14 +9,14 @@
 
     <h2>Edit question</h2>
 
-    <form action="/question/{{ question_id }}/edit-question" method="post">
-        <p>Title of the question</br>
-        {% for data in question %}
+    {% for data in question %}
+        <form action="/question/{{ question_id }}/edit-question" method="post">
+            <p>Question title:</br>
             <input name="title" size="52" value={{ data.title }}></p>
-            <p>Text of message</br>
+            <p>Question message:</br>
             <textarea name="message" rows="10" cols="80">{{ data.message }}</textarea></p>
-        {% endfor %}
-        <input type="submit" value="Edit question">
-    </form>
+            <input type="submit" value="Edit question">
+        </form>
+    {% endfor %}
 </body>
 </html>
