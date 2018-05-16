@@ -1,8 +1,6 @@
 import os
 import psycopg2
 import psycopg2.extras
-import pwhashing
-
 
 def get_connection_string():
     user_name = os.environ.get('PSQL_USER_NAME')
@@ -21,7 +19,6 @@ def get_connection_string():
         )
     else:
         raise KeyError('Some necessary environment variable(s) are not defined')
-
 
 def open_database():
     try:
@@ -43,4 +40,3 @@ def connection_handler(function):
         connection.close()
         return ret_value
     return wrapper
-

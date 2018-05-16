@@ -7,61 +7,32 @@
 </head>
 <body>
     <h1>Ask Mate</h1>
-
     <h2>Question details</h2>
-
-    <p>
     <table class="questiontables">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Question</th>
-            <th>Submission time</th>
-            <th>View number</th>
-            <th>Actions</th>
+            <th> Title</th>
+            <th> Question </th>
+            <th> Submission Time </th>
+            <th> View number </th>
         </tr>
         </thead>
         <tbody>
-        {% for data in question %}
-            <tr>
-                <td>{{ data.title }}</td>
-                <td>{{ data.message }}</td>
-                <td>{{ data.submission_time }}</td>
-                <td>{{ data.view_number }}</td>
-                <td>
-                    <p><a href="/question/{{ question_id }}/edit-question"><button type="button">Edit question</button></a></p>
-                    <p><a href="/question/{{ question_id }}/delete-question"><button type="button">Delete question</button></a></p>
-                </td>
-            </tr>
-        {% endfor %}
+        <tr>{% for data in question %}
+            <td>{{ data.title }}</td>
+            <td><a href="/question/{{ data.id }}/edit_question"">{{ data.message }}</a></td>
+            <td>{{ data.submission_time }}</td>
+            <td>{{ data.view_number }}</td>
+        </tr>{% endfor %}
         </tbody>
     </table>
-    </p>
 
-    <p>
-    <table class="answertables">
-        <thead>
-        <tr>
-            <th>Answer</th>
-            <th>Submission time</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <p>The answers are:</p>
         {% for data in answer %}
-            <tr>
-                <td>{{ data.message }}</td>
-                <td>{{ data.submission_time }}</td>
-                <td>
-                    <p><a href="/question/{{ question_id }}/answer/{{ data.id }}/edit-answer"><button type="button">Edit answer</button></a></p>
-                    <p><a href="/question/{{ question_id }}/answer/{{ data.id }}/delete-answer"><button type="button">Delete answer</button></a></p>
-                </td>
-            </tr>
+            <p><h><a href="/answer/{{data.id}}/edit_answer">{{ data.message }}</a></h></p>
         {% endfor %}
-        </tbody>
-    </table>
-    </p>
 
-    <p><a href="/question/{{ question_id }}/add-answer"><button type="button">Add new answer</button></a></p>
+    <p><a href="/question/{{question_id}}/add-answer"><button type="button">Add new answer</button></a></p>
+
 </body>
 </html>
