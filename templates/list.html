@@ -17,19 +17,21 @@
                 <span class="warning">{{ message }}</span>
             </form>
         </div>
-            <div class="button">
+        <div class="button">
             <form action="{{url_for('registration')}}" method="get">
-            <input type="submit" value="Registration">
+                <input type="submit" value="Registration">
             </form>
-            </div>
-            {% else %}
-            <div>
-            {{ message }}
-            <form action="{{ url_for("logged_out") }}" method="post">
+        </div>
+        {% else %}
+        <div>
+            {% for data in user_id_and_name %}
+                <a href="/user_page/{{ data.id }}">Hi {{ data.user_name }}!</a>
+            {% endfor %}
+                <form action="{{ url_for("logged_out") }}" method="post">
                 <input type="submit" value="Logout">
             </form>
-            </div>
-            {% endif %}
+        </div>
+        {% endif %}
 
     <table class="questiontables">
         <thead>
