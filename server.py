@@ -121,6 +121,12 @@ def logged_out():
     return redirect('/list')
 
 
+@app.route('/usernames', methods=['GET'])
+def usernames():
+     all_names = data_manager.get_usernames()
+     return render_template('listusers.html', all_names=all_names)
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

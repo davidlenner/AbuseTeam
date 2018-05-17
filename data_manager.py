@@ -152,3 +152,10 @@ def registration(cursor, username, password, time):
                     """, {'user_name': username, 'password': password, 'registration_time': time})
 
 
+@util.connection_handler
+def get_usernames(cursor):
+    cursor.execute(""" SELECT user_name FROM users""")
+
+    usernames = cursor.fetchall()
+    return usernames
+
