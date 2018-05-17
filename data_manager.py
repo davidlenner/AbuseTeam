@@ -146,16 +146,16 @@ def check_user(cursor):
 
 
 @util.connection_handler
-def get_user_id(cursor, user_name):
+def get_user_id_and_name(cursor, user_name):
     cursor.execute("""
-                    SELECT id
+                    SELECT id, user_name
                     FROM users
                     WHERE user_name=%(user_name)s;
                     """,
                    {'user_name': user_name})
-    user_id = cursor.fetchall()
+    user_id_and_name = cursor.fetchall()
 
-    return user_id
+    return user_id_and_name
 
 
 @util.connection_handler
@@ -163,4 +163,42 @@ def registration(cursor, username, password, time):
     cursor.execute("""INSERT INTO users (user_name,password,registration_time) VALUES (%(user_name)s,%(password)s,%(registration_time)s);
                     """, {'user_name': username, 'password': password, 'registration_time': time})
 
+
+@util.connection_handler
+def get_user_questions(cursor, user_id):
+    cursor.execute("""
+                    SELECT title, message
+                    FROM question
+                    WHERE user_id=%(user_id)s;
+                    """,
+                    {'user_id': user_id})
+    questions = cursor.fetchall()
+
+    return questions
+
+
+@util.connection_handler
+def get_user_answers(cursor, user_id):
+    cursor.execute("""
+                    SELECT message
+                    FROM answer
+                    WHERE user_id=%(user_id)s;
+                    """,
+                   {'user_id': user_id})
+    answers = cursor.fetchall()
+
+    return answers
+
+
+@util.connection_handler
+def get_username(cursor, user_id):
+    cursor.execute("""
+                    SELECT user_name
+                    FROM USERS
+                    WHERE user_id=%(user_id);
+                    """,
+                   {'user_id': user_id})
+    user_name = cursor.fetchall()
+
+    return user_name
 
