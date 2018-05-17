@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users List</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="usertable">
+        <table>
+            <thead>
+                <th>User Names</th>
+            </thead>
+            <tbody>
+                    {% for name in all_names %}
+                <tr>
+                    <td>{{ name.user_name }}</td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
