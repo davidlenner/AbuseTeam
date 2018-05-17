@@ -23,13 +23,7 @@
                 <input type="submit" value="Registration">
             </form>
         </div>
-    <div>
-        <form action="{{ url_for("search_question") }}" method="get">
-            Search in the questions:<br>
-            <input type="search" name="user_input_search" placeholder="search here">
-            <input type="submit">
-        </form>
-    </div><br>
+
 
         {% else %}
         <div>
@@ -40,6 +34,13 @@
                 <input type="submit" value="Logout">
             </form>
         </div>
+        <div>
+            <form action="{{ url_for("search_question") }}" method="get">
+                Search in the questions:<br>
+                <input type="search" name="user_input_search" placeholder="search here">
+                <input type="submit">
+            </form>
+        </div><br>
         {% endif %}
 
 
@@ -49,8 +50,6 @@
             <th>Title</th>
             <th>Question</th>
             <th>Submission Time</th>
-            <th>View Number</th>
-            <th>Vote Number</th>
         </tr>
         </thead>
 
@@ -60,8 +59,6 @@
                 <td>{{ question.title }}</td>
                 <td><a href="question/{{ question.id }}">{{ question.message }}</a></td>
                 <td>{{ question.submission_time }}</td>
-                <td>{{ question.view_number }}</td>
-                <td>{{ question.vote_number }}</td>
             </tr>
         {% endfor %}
         </tbody>
