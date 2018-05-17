@@ -3,6 +3,7 @@ import data_manager
 from datetime import datetime
 import pwhashing
 
+
 app = Flask(__name__)
 app.secret_key = 'AskMateSecretKey'
 
@@ -22,6 +23,7 @@ def route_list():
         for dict in user_database_password:
             for key, value in dict.items():
                 if pwhashing.verify_password(user_input_password, value):
+
                     session['user_id'] = data_manager.get_user_id_and_name(user_input_username)
                     is_logged_in = "true"
                     message = "Hi " + user_input_username + "!"
@@ -124,12 +126,14 @@ def logged_out():
     return redirect('/list')
 
 
+
 @app.route('/user_page/<user_id>', methods=['GET'])
 def user_page(user_id):
     questions = data_manager.get_user_questions(user_id)
     answers = data_manager.get_user_answers(user_id)
 
     return render_template('user_page.html', questions=questions, answers=answers)
+
 
 
 if __name__ == '__main__':
