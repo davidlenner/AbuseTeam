@@ -24,6 +24,18 @@ def get_question_by_id(cursor, id):
 
 
 @util.connection_handler
+def search_question(cursor, search_phrase):
+    cursor.execute("""
+                    SELECT * FROM question
+                    WHERE (title LIKE %(searched_phrase)s OR message LIKE %(searched_phrase)s);
+                    """,
+                   {'searched_phrase': '%' + search_phrase + '%'})
+    searched_questions = cursor.fetchall()
+
+    return searched_questions
+
+
+@util.connection_handler
 def add_question(cursor, new_title, new_message, time, user_id):
     cursor.execute("""
                     INSERT INTO question (title, message, submission_time, user_id)
