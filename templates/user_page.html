@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>User Page</title>
 </head>
 <body>
-<h1>heyhoo </h1>
+    <table class="questiontables">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.title }}</td>
+                <td>{{ question.message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="questiontables">
+        <thead>
+        <tr>
+            <th>Message</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for answer in answers %}
+            <tr>
+                <td>{{ answer.message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="/list">Home page</a>
 </body>
 </html>

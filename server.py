@@ -19,20 +19,22 @@ def route_list():
         user_input_username = request.form['user_input_username']
         user_input_password = request.form['user_input_password']
         user_database_password = data_manager.get_password(user_input_username)
+
         for dict in user_database_password:
             for key, value in dict.items():
                 if pwhashing.verify_password(user_input_password, value):
-                    session['user_id'] = data_manager.get_user_id(user_input_username)
-                    user_input_username = request.form['user_input_username']
-                    message = "Hi " + user_input_username + "!"
+
+                    session['user_id'] = data_manager.get_user_id_and_name(user_input_username)
                     is_logged_in = "true"
-                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in,
-                                           message=message)
+                    message = "Hi " + user_input_username + "!"
+                    return render_template('list.html', questions=reversed(questions),
+                                           is_logged_in=is_logged_in, message=message, user_id_and_name=session['user_id'])
+
                 else:
                     message = "Invalid username or password!"
                     is_logged_in = "false"
-                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in,
-                                           message=message)
+                    return render_template('list.html', questions=reversed(questions),
+                                           is_logged_in=is_logged_in, message=message)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -124,10 +126,14 @@ def logged_out():
     return redirect('/list')
 
 
-@app.route('/usernames', methods=['GET'])
-def usernames():
-     all_names = data_manager.get_usernames()
-     return render_template('listusers.html', all_names=all_names)
+
+@app.route('/user_page/<user_id>', methods=['GET'])
+def user_page(user_id):
+    questions = data_manager.get_user_questions(user_id)
+    answers = data_manager.get_user_answers(user_id)
+
+    return render_template('user_page.html', questions=questions, answers=answers)
+
 
 
 if __name__ == '__main__':
