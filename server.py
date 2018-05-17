@@ -55,6 +55,13 @@ def question_by_id(question_id):
     return render_template('question_id.html', question=question, answer=answer, question_id=question_id)
 
 
+@app.route('/search', methods=['GET'])
+def search_question():
+    user_input_search = request.args.get('user_input_search')
+    searched_questions = data_manager.search_question(user_input_search)
+    return render_template('list.html', questions=reversed(searched_questions))
+
+
 @app.route('/question/<question_id>/edit-question', methods=['GET', 'POST'])
 def edit_question(question_id):
     if request.method == 'GET':

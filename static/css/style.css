@@ -70,12 +70,11 @@ h1 {
     color: white;
 }
 
-.questiontables tr:nth-child(even) {background-color: #f2f2f2;}
-
 
 .warning {
     color: #85144b;
 }
+
 
 .button {
     float: right;

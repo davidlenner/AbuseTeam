@@ -8,7 +8,7 @@
 <body>
     <h1>Ask Mate</h1><br>
 
-        {% if is_logged_in != "true" %}
+    {% if is_logged_in != "true" %}
         <div>
             <form action="/list" method="post">
                 <input type="test" name="user_input_username" placeholder="username">
@@ -23,6 +23,14 @@
                 <input type="submit" value="Registration">
             </form>
         </div>
+    <div>
+        <form action="{{ url_for("search_question") }}" method="get">
+            Search in the questions:<br>
+            <input type="search" name="user_input_search" placeholder="search here">
+            <input type="submit">
+        </form>
+    </div><br>
+
         {% else %}
         <div>
             {% for data in user_id_and_name %}
@@ -33,6 +41,7 @@
             </form>
         </div>
         {% endif %}
+
 
     <table class="questiontables">
         <thead>
