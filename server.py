@@ -3,6 +3,7 @@ import data_manager
 from datetime import datetime
 import pwhashing
 
+
 app = Flask(__name__)
 app.secret_key = 'AskMateSecretKey'
 
@@ -22,14 +23,16 @@ def route_list():
             for key, value in dict.items():
                 if pwhashing.verify_password(user_input_password, value):
                     session['user_id'] = data_manager.get_user_id(user_input_username)
-                    is_logged_in = "true"
+                    user_input_username = request.form['user_input_username']
                     message = "Hi " + user_input_username + "!"
-                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in, message=message)
-
+                    is_logged_in = "true"
+                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in,
+                                           message=message)
                 else:
                     message = "Invalid username or password!"
                     is_logged_in = "false"
-                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in, message=message)
+                    return render_template('list.html', questions=reversed(questions), is_logged_in=is_logged_in,
+                                           message=message)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
